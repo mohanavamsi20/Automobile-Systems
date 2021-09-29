@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Your Orders - AMG</title>
+{% endblock title %}
+{% block menuyourorder %}
+<li class="active"><a href="{% url 'shop:shop-orders' %}">Your Orders</a></li>
+{% endblock menuyourorder %}
+{% block content %}
+<div id="main" class="alt">
+
+    <!-- One -->
+      <section id="one">
+        <div class="inner">
+          <header class="major">
+            <h1>YOUR ORDERS</h1>
+          </header>
+        </div>
+      </section>
+      <section class="tiles">
+        {% for object in page.object_list%}
+        <article>
+          <span class="image">
+            <img src="{{object.car.image.url}}" alt="" />
+          </span>
+          <header class="major">
+            <p>
+              <i class="fa fa-dashboard"></i>  {{object.car.mileage}}&nbsp;&nbsp;
+              <i class="fa fa-cube"></i> {{object.car.engine_size}}&nbsp;&nbsp;
+              <i class="fa fa-cog"></i> {{object.car.gear_box}}
+            </p>
+            <h3>{{object.car.make}}</h3>
+            <h4>{{object.car.model}}</h4>
+            <p><strong> {{object.car.price}}</strong></p>
+            <p>{{object.car.power}}  /  {{object.car.fuel}}  /  {{object.car.year}}</p>
+            <div class="major-actions">
+              <a href="{% url 'shop:product-detail' object.car_id %}" class="button small next">View Car</a>
+            </div>
+          </header>
+        </article>
+        {% endfor %}
+      </section>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center" style="margin-top: 10px;">
+          {% if page.has_previous %}
+          <li class="primary"><a class="button" href="{% url 'shop:sales-orders' %}?page={{page.previous_page_number}}">Previous</a></li>
+          {% endif %}
+          {% if page.has_next%}
+          <li class="primary"><a class="button" href="{% url 'shop:sales-orders' %}?page={{page.next_page_number}}">Next</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+  </div>
+  <div class="col" style="text-align: center;margin-top:10px;">
+  <a href="{% url 'shop:shop-home' %}" style="text-align: center; margin:10px;" class="button">Back to Home</a>
+  </div>
+{% endblock content %}

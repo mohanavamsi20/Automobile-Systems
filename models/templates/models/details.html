@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>MODEL DETAILS - AMG</title>
+{% endblock title %}
+{% block content %}
+{% if messages %}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Congratulations!</h4>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+<div id="main" class="alt">
+    <!-- One -->
+        <section id="one">
+            <div class="inner">
+                <header class="major">
+                    <h1>{{car.make}} {{car.variant}}</h1>
+                </header>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{car.image.url}}" class="img-responsive" alt="image">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image1.url}}" class="img-responsive" alt="InteriorImage"></div>
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image2.url}}" class="img-responsive" alt="InteriorImage"></div>
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image3.url}}" class="img-responsive" alt="InteriorImage"></div>
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image4.url}}" class="img-responsive" alt="InteriorImage"></div>
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image5.url}}" class="img-responsive" alt="InteriorImage"></div>
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image6.url}}" class="img-responsive" alt="InteriorImage"></div>
+                        </div>
+                        <br>
+                        <h2>Ex-Showroom Price : <i class="fa fa-inr"> {{car.price}}</i></h2>
+                    </div>
+                </div>
+                <br>
+                <form action="#">
+                    <div class="fields">
+                        <div class="field quarter">
+                            <label>Type</label>
+                            <input type="text" readonly value="New vehicle">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Make</label>
+                            <input type="text" readonly value="{{car.make}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Model</label>
+                            <input type="text" readonly value="{{car.model}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Manufacture Year</label>
+                            <input type="text" readonly value="{{car.year}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Mileage</label>
+                            <input type="text" readonly value="{{car.mileage}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Fuel</label>
+                            <input type="text" readonly value="{{car.fuel}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Engine size</label>
+                            <input type="text" readonly value="{{car.engine_size}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Power</label>
+                            <input type="text" readonly value="{{car.power}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Gearbox</label>
+                            <input type="text" readonly value="{{car.gear_box}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Number of seats</label>
+                            <input type="text" readonly value="{{car.seats}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Doors</label>
+                            <input type="text" readonly value="{{car.doors}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Color</label>
+                            <input type="text" readonly value="{{car.colors}}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="inner">
+                <section>
+                    <header class="major">
+                        <h2>Vehicle Description</h2>
+                    </header>
+
+                    <p>{{car.description}}</p>
+                </section>
+
+                <section class="split">
+                    <section>
+                        <div class="contact-method">
+                            <span class="icon alt fa-user"></span>
+                            <h3>Dealer</h3>
+                            <span>{{car.dealer}}</span>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="contact-method">
+                            <span class="icon alt fa-envelope"></span>
+                            <h3>Dealer Email</h3>
+                            <a href="#">{{car.dealer.email}}</a>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-method">
+                            <span class="icon alt fa-phone"></span>
+                            <h3>Dealer Phone</h3>
+                            <span>{{car.dealer.mobile}}</span>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </section>
+</div>
+<form align="center" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'models:custom-order' %}" class="button">CUSTOM ORDER</a>
+<button class="primary" style="margin-top: 20px;">BOOK NOW</button>
+</form>
+{% endblock content%}

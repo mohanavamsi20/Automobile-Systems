@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<noscript><link rel="stylesheet" href="/static/css/noscript.css" /></noscript>
+    {% block title %}
+    <title>AutoMobile Garage</title>
+    {% endblock title %}
+</head>
+{% block navbar %}
+<body class="is-preload">
+<div id="wrapper">
+  <header id="header" class="alt">
+    <a href="/" class="logo"><strong>Automobile</strong> <span>Garage</span></a>
+    <nav>
+      <a href="#menu">Menu</a>
+    </nav>
+  </header>
+  <nav id="menu">
+    <ul class="links">
+      {% block menuhome %}
+      <li> <a href="/">Home </a> </li>
+      {% endblock menuhome %}
+      {% block menunewcars %}
+      <li> <a href="{% url 'models:models-home'%}">New Cars</a> </li>
+      {% endblock menunewcars %}
+      {% block menucustom %}
+      <li><a href="{% url 'models:custom-order' %}">Custom Order</a></li>
+      {% endblock menucustom %}
+      {% block menudealerlocate %}
+      <li> <a href="{% url 'models:dealer-locate'%}">Dealer locator</a> </li>
+      {% endblock menudealerlocate %}
+      {% block menuoldcars %}
+      <li> <a href="{% url 'shop:shop-home'%}">Old Cars</a> </li>
+      {% endblock menuoldcars %}
+      {% if request.session.username %}
+      {% block menuyourprofile %}
+      <li><a href="{% url 'home:profile' %}">Your Profile</a></li>
+      {% endblock menuyourprofile %}
+      {% block menuyourorder %}
+      <li><a href="{% url 'shop:shop-orders' %}">Your orders</a></li>
+      {% endblock menuyourorder %}
+      {% block menuyoursales %}
+      <li><a href="{% url 'shop:shop-sales' %}">Your Sales</a></li>
+      {% endblock menuyoursales %}
+      {% block menudashboard %}
+      <li><a href="{% url 'dashboard:dashboard-home' %}">Dashboard</a></li>
+      {% endblock menudashboard %}
+      <li><a href="{% url 'home:logout' %}">Logout</a></li>
+      {% else %}
+      {% block navbarprofile %}
+      {% block menulogin %}
+      <li><a href="/login/?next={{ request.path }}">Login</a></li>
+      {% endblock menulogin %}
+      {% endblock navbarprofile %}
+      {% endif %}
+      </ul>
+  </nav>
+    {% endblock navbar %}
+    {% block content %}
+    <h1>Welcome to Automobile Garage</h1>
+    {% endblock content %}
+    {% block footer %}
+    <footer id="footer" style="text-align: center;">
+      <div class="inner">
+        <ul class="icons">
+          <li><a href="https://github.com/iamtariqueanjum/sdp2" class="icon alt fa-github"><span class="label">Github</span></a></li>
+          <li><a href="https://www.linkedin.com/pulse/automobile-business-system-mohammad-tarique-anjum/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        </ul>
+        <ul class="copyright">
+          <li>Copyright © 2021 Company Name - Automobile Garage</li>
+          <li>Skill Development Project-2 Project Group 436</li>
+        </ul>
+      </div>
+    </footer>
+    {% endblock footer %}
+  </div>
+  <script src="/static/js/jquery.min.js"></script>
+	<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/static/js/jquery.scrolly.min.js"></script>
+	<script src="/static/js/jquery.scrollex.min.js"></script>
+	<script src="/static/js/browser.min.js"></script>
+	<script src="/static/js/breakpoints.min.js"></script>
+	<script src="/static/js/util.js"></script>
+	<script src="/static/js/main.js"></script>
+</body>
+</html>

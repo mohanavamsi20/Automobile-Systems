@@ -1,0 +1,4 @@
+<option value="" selected>---------</option>
+{% for variant in variants %}
+<option value="{{ variant.pk }}">{{ variant.name }}</option>
+{% endfor %}

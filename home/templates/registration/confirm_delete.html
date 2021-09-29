@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>Delete your profile permanently</title>
+{% endblock title %}
+{% block content %}
+<header class="major" style="margin-left:43%;">
+  <h2>CONFIRM DELETE</h2>
+</header>
+  <form method="POST" style="margin-left:15%;">
+        {% csrf_token %}
+        <div class="container fields">
+          {% for field in form %}
+          <div class="row field">
+            <div class="col">
+              {{ field.label_tag }}
+            </div>
+            <div class="col">
+              {{ field }}
+            </div>
+          </div>
+            <div class="row">
+              <div class="col"></div>
+              <div class="col">
+                <span id="helpText" class="form-text">
+                  {% if field.errors %}
+                    <div class="help">{{ field.errors }}</div>
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+          {% endfor %}
+          <div class="col" style="text-align: center;margin-top:10px;">
+              <button type="submit" class="primary" style="margin-right:10px;">Confirm Delete</button>
+              <a href="{% url 'home:profile' %}" class="button">Cancel</a>
+          </div>
+        </div>
+    </form>
+{% endblock content %}

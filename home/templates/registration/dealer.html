@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Create an account - Dealer</title>
+{% endblock title %}
+{% block content %}
+{% block navbarprofile %}
+{% endblock navbarprofile %}
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Congratulations !!!</h4>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+<header class="major">
+    <h2>DEALER SIGNUP</h2>
+  </header>
+      <form method="POST" id="personForm" data-cities-url="{% url 'home:load_cities' %}">
+          {% csrf_token %}
+          <div class="container">
+            {% for field in form %}
+            <div class="row">
+              <div class="col">
+                {{ field.label_tag }}
+              </div>
+              <div class="col">
+                {{ field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col"></div>
+              <div class="col">
+                  <span id="helpText" class="form-text">
+                    {% if field.errors %}
+                      <div class="help">{{ field.errors }}</div>
+                    {% endif %}
+                  </span>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="termsAgree" required>
+              <label class="form-check-label" for="termsAgree">By creating this account, I understand and agree to
+              Our Privacy notice and Terms of Use (required)</label>
+            </div>
+            <div class="col" style="text-align: center;margin-top:10px;">
+                <button type="submit" class="primary" style="margin-right:10px;">Become a Dealer</button>
+                <a href="{% url 'models:models-home' %}" class="button">Back to Home</a>
+            </div>
+          </div>
+      </form>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+      $("#id_state").change(function () {
+          const url = $("#personForm").attr("data-cities-url");
+          const stateId = $(this).val();
+  
+          $.ajax({
+              url: url,
+              data: {
+                  'state_id': stateId
+              },
+              success: function (data) {
+                  $("#id_city").html(data);
+              }
+          });
+  
+      });
+  </script>
+{% endblock content %}

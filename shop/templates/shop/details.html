@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>PRODUCT DETAILS - AMG</title>
+{% endblock title %}
+{% block content %}
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Congratulations!</h4>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+      <hr>
+        <p class="mb-0">You can <a href="{% url 'shop:shop-orders' %}" class="alert-link">Check your orders here</a></p>
+    </div>
+{% endif %}
+
+<div id="main" class="alt">
+    <!-- One -->
+        <section id="one">
+            <div class="inner">
+                <header class="major">
+                    <h1>{{car.make}} {{car.variant}}</h1>
+                </header>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{car.image.url}}" class="img-responsive" alt="">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            {% if car.image1 %}
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image1.url}}" class="img-responsive" alt=""></div>
+                            {% endif %}
+                            {% if car.image2 %}
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image2.url}}" class="img-responsive" alt=""></div>
+                            {% endif %}
+                            {% if car.image3 %}
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image3.url}}" class="img-responsive" alt=""></div>
+                            {% endif %}
+                            {% if car.image4 %}
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image4.url}}" class="img-responsive" alt=""></div>
+                            {% endif %}
+                            {% if car.image5 %}
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image5.url}}" class="img-responsive" alt=""></div>
+                            {% endif %}
+                            {% if car.image6 %}
+                            <div class="col-md-4 col-xs-6"><img src="{{car.image6.url}}" class="img-responsive" alt=""></div>
+                            {% endif %}
+                        </div>
+                        <br>
+                        <h2>Price :{{car.price}}</h2>
+                    </div>
+                </div>
+                <br>
+                <form action="#">
+                    <div class="fields">
+                        <div class="field quarter">
+                            <label>Type</label>
+                            <input type="text" readonly value="New vehicle">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Make</label>
+                            <input type="text" readonly value="{{car.make}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Model</label>
+                            <input type="text" readonly value="{{car.model}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Manufacture Year</label>
+                            <input type="text" readonly value="{{car.year}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Mileage</label>
+                            <input type="text" readonly value="{{car.mileage}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Fuel</label>
+                            <input type="text" readonly value="{{car.fuel}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Engine size</label>
+                            <input type="text" readonly value="{{car.engine_size}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Power</label>
+                            <input type="text" readonly value="{{car.power}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Gearbox</label>
+                            <input type="text" readonly value="{{car.gear_box}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Number of seats</label>
+                            <input type="text" readonly value="{{car.seats}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Doors</label>
+                            <input type="text" readonly value="{{car.doors}}">
+                        </div>
+
+                        <div class="field quarter">
+                            <label>Color</label>
+                            <input type="text" readonly value="{{car.colors}}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="contact">
+        <div class="inner">
+            <section>
+                <header class="major">
+                    <h2>Vehicle Description</h2>
+                </header>
+                <p>{{car.description}}</p>
+            </section>
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon alt fa-user"></span>
+                        <h3>Seller</h3>
+                        <span>{{car.fullname}}</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon alt fa-envelope"></span>
+                        <h3>Seller Email</h3>
+                        <span>{{car.email}}</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon alt fa-phone"></span>
+                        <h3>Seller Phone</h3>
+                        <span>{{car.mobile}}</span>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+</div>
+{% if request.session.username != car.email %}
+{% if car.status %}
+<form method="POST" align="center">
+    {% csrf_token %}
+<button class="primary" style="margin-top: 20px;">BUY NOW</button>
+</form>
+{% endif %}
+{% endif %}
+{% endblock content%}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>SHOP - AMG</title>
+{% endblock title %}
+{% block menuoldcars %}
+<li class="active"> <a href="{% url 'shop:shop-home'%}">Old Cars</a> </li>
+{% endblock menuoldcars %}
+{% block content %}
+<section class="tiles">
+  <article>
+    <span class="image">
+      <img src="/static/images/blog-1-720x480.jpg" alt="stockimg" />
+    </span>
+    <header class="major">
+      <h3>BUY</h3>
+
+      <p>Buy a verified used car</p>
+
+      <div class="major-actions">
+        <a href="{% url 'shop:shop-buy' %}" class="button small next scrolly">BUY NOW</a>
+      </div>
+    </header>
+  </article>
+  <article>
+    <span class="image">
+      <img src="/static/images/blog-2-720x480.jpg" alt="stockimg" />
+    </span>
+    <header class="major">
+      <h3>SELL</h3>
+
+      <p>Sell your car at Best price</p>
+
+      <div class="major-actions">
+        <a href="{% url 'shop:shop-sell' %}" class="button small next scrolly">SELL NOW</a>
+      </div>
+    </header>
+  </article>
+  <article>
+    <span class="image">
+      <img src="/static/images/browse.jpeg" alt="stockimg" />
+    </span>
+    <header class="major">
+      <h3>BROWSE</h3>
+
+      <p>SEARCH NEW MODEL CARS IN ALL BRANDS AND VARIANTS</p>
+
+      <div class="major-actions">
+        <a href="{% url 'models:models-home' %}" class="button small next scrolly">BROWSE</a>
+      </div>
+    </header>
+  </article>
+  <article>
+    <span class="image">
+      <img src="/static/images/1016-hero.jpg" alt="stockimg" />
+    </span>
+    <header class="major">
+      <h3>ORDERS</h3>
+
+      <p>Check your previous orders</p>
+
+      <div class="major-actions">
+        <a href="{% url 'shop:shop-orders' %}" class="button small next scrolly">GO TO ORDERS</a>
+      </div>
+    </header>
+  </article>
+  <article>
+    <span class="image">
+      <img src="/static/images/car-sales.jpg" alt="stockimg" />
+    </span>
+    <header class="major">
+      <h3>SALES</h3>
+
+      <p>Check status of your sales</p>
+
+      <div class="major-actions">
+        <a href="{% url 'shop:shop-sales' %}" class="button small next scrolly">GO TO SALES</a>
+      </div>
+    </header>
+  </article>
+  <article>
+    <span class="image">
+      <img src="/static/images/dashboard.jpg" alt="stockimg" />
+    </span>
+    <header class="major">
+      <h3>DASHBOARD</h3>
+
+      <p>See your stats</p>
+
+      <div class="major-actions">
+        <a href="#" class="button small next scrolly">GO TO DASHBOARD</a>
+      </div>
+    </header>
+  </article>
+</section>
+{% endblock content %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Your Sales - AMG</title>
+{% endblock title %}
+{% block menuyoursales%}
+<li class="active"><a href="{% url 'shop:shop-sales' %}">Your Sales</a></li>
+{% endblock menuyoursales%}
+{% block content %}
+<div id="main" class="alt">
+
+    <!-- One -->
+      <section id="one">
+        <div class="inner">
+          <header class="major">
+            <h1>YOUR SALES</h1>
+          </header>
+        </div>
+      </section>
+      <section>
+        <div class="inner">
+          <form method="post" align="center" id="buyfilterForm" data-models-url="{% url 'shop:load_models' %}" data-variants-url="{% url 'shop:load_variants' %}">
+            {% csrf_token %}
+            <div class="container fields">
+              <div class="field quarter">
+                <label>{{myFilter.form.make.label}}</label>
+                {{myFilter.form.make}}
+              </div>
+              <div class="field quarter">
+                <label>{{myFilter.form.model.label}}</label>
+                {{myFilter.form.model}}
+              </div>
+              <div class="field quarter">
+                <label>{{myFilter.form.variant.label}}</label>
+                {{myFilter.form.variant}}
+              </div>
+              <div class="field half text-right">
+                <ul class="actions">
+                  <li><input type="submit" value="Search" class="primary"></li>
+                </ul>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="tiles">
+        {% for object in page.object_list%}
+        <article>
+          <span class="image">
+            <img src="{{object.image.url}}" alt="" />
+          </span>
+          <header class="major">
+            <p>
+              <i class="fa fa-dashboard"></i>  {{object.mileage}}&nbsp;&nbsp;
+              <i class="fa fa-cube"></i> {{object.engine_size}}&nbsp;&nbsp;
+              <i class="fa fa-cog"></i> {{object.gear_box}}
+            </p>
+            <h3>{{object.make}}</h3>
+            <h4>{{object.model}}</h4>
+            <p><strong> {{object.price}}</strong></p>
+            <p>{{object.power}}  /  {{object.fuel}}  /  {{object.year}}</p>
+            <div class="major-actions">
+              <a href="{% url 'shop:product-detail' object.id %}" class="button small next">View Car</a>
+            </div>
+          </header>
+        </article>
+        {% endfor %}
+      </section>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center" style="margin-top: 10px;">
+          {% if page.has_previous %}
+          <li class="primary"><a class="button" href="{% url 'shop:sales-home' %}?page={{page.previous_page_number}}">Previous</a></li>
+          {% endif %}
+          {% if page.has_next%}
+          <li class="primary"><a class="button" href="{% url 'shop:sales-home' %}?page={{page.next_page_number}}">Next</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+      $("#id_make").change(function () {
+          const url = $("#buyfilterForm").attr("data-models-url");
+          const makeId = $(this).val();
+  
+          $.ajax({
+              url: url,
+              data: {
+                  'make_id': makeId
+              },
+              success: function (data) {
+                  $("#id_model").html(data);
+              }
+          });
+  
+      });
+      $("#id_model").change(function () {
+          const url = $("#buyfilterForm").attr("data-variants-url");
+          const modelId = $(this).val();
+  
+          $.ajax({
+              url: url,
+              data: {
+                  'model_id': modelId
+              },
+              success: function (data) {
+                  $("#id_variant").html(data);
+              }
+          });
+  
+      });
+  </script>
+  <div class="col" style="text-align: center;margin-top:10px;">
+  <a href="{% url 'shop:shop-home' %}" style="text-align: center; margin:10px;" class="button">Back to Home</a>
+  </div>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>Your profile</title>
+{% endblock title %}
+{% block menuyourprofile%}
+  <li class="active"><a href="{% url 'home:profile' %}">Your Profile</a></li>
+{% endblock menuyourprofile%}
+{% block content %}
+{% if messages %}
+  <div class="alert alert-success" role="alert">
+      {% for message in messages %}
+          <p>{{ message }} </p>
+      {% endfor %}
+  </div>
+{% endif %}
+<header class="major" style="margin-left:48%;">
+  <h2>PROFILE</h2>
+</header>
+        {% csrf_token %}
+        <div class="container fields">
+          {% for field in form %}
+          <div class="row field">
+            <div class="col">
+              {{ field.label_tag }}
+            </div>
+            <div class="col" style="background-color:#242943;">
+              {{ field }}
+            </div>
+            <div class="row">
+              <div class="col"></div>
+            <div class="col">
+                <span id="helpText" class="form-text">
+                  {% if field.errors %}
+                    <div class="help">{{ field.errors }}</div>
+                  {% endif %}
+                </span>
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="col" style="text-align: center;margin-top:10px;">
+              <a href="{% url 'home:account-update' %}" class="button" style="margin-right:10px;">Update your Profile</a>
+              <a href="{% url 'home:account-delete' %}" class="button">Delete your account</a>
+          </div>
+        </div>
+{% endblock content %}

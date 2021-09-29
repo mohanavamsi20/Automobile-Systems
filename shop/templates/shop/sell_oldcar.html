@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Sell old car</title>
+{% endblock title %}
+{% block content %}
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Congratulations!</h4>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+      <hr>
+        <p class="mb-0">You can <a href="{% url 'shop:shop-sales'%}" class="alert-link">Check your sales here</a></p>
+    </div>
+{% endif %}
+<section id="contact">
+  <div class="inner">
+    <section>
+      <header class="major">
+        <h2>SELL CAR</h2>
+      </header>
+
+      <form method="POST" enctype="multipart/form-data" id="sellCarForm" data-cities-url="{% url 'home:load_cities' %}" data-models-url="{% url 'shop:load_models' %}" data-variants-url="{% url 'shop:load_variants' %}">
+              {% csrf_token %}
+          <div class="fields">
+            <div class="field half">
+              <label>{{form.fullname.label_tag}}</label>
+              {{form.fullname}}
+              <span class="form-text text-muted">
+                {% if form.fullname.errors %}
+                <div class="help">{{ form.fullname.errors }}</div>
+              {% endif %}
+            </span>
+            </div>
+            <div class="field half">
+              <label>{{form.email.label_tag}}</label>
+              {{form.email}}
+              <span class="form-text text-muted">
+                {% if form.email.errors %}
+                <div class="help">{{ form.email.errors }}</div>
+              {% endif %}
+            </span>
+            </div>
+            <div class="field">
+              <label>{{form.mobile.label_tag}}</label>
+              {{form.mobile}}
+            </div>
+            <div class="field">
+              <label>{{form.state.label_tag}}</label>
+              {{form.state}}
+            </div>
+            <div class="field">
+              <label>{{form.city.label_tag}}</label>
+              {{form.city}}
+            </div>
+            <div class="field half">
+              <label>{{form.make.label_tag}}</label>
+              {{form.make}}
+            </div>
+            <div class="field half">
+              <label>{{form.model.label_tag}}</label>
+              {{form.model}}
+            </div>
+                <div class="field half">
+                  <label>{{form.variant.label_tag}}</label>
+                  {{form.variant}}
+                </div>
+                <div class="field half">
+                  <label>{{form.image.label_tag}}</label>
+                  {{form.image}}
+                </div>
+                <div class="field half">
+                  <label>{{form.image1.label_tag}}(optional) </label>
+                  {{form.image1}}
+                </div>
+                <div class="field half">
+                  <label>{{form.image2.label_tag}}(optional)</label>
+                  {{form.image2}}
+                  </div>
+                <div class="field half">
+                  <label>{{form.image3.label_tag}}(optional)</label>
+                  {{form.image3}}
+                  </div>
+                <div class="field half">
+                  <label>{{form.image4.label_tag}}(optional)</label>
+                  {{form.image4}}
+                  </div>
+                <div class="field half">
+                  <label>{{form.image5.label_tag}}(optional)</label>
+                  {{form.image5}}
+                  </div>
+                <div class="field half">
+                  <label>{{form.image6.label_tag}}(optional)</label>
+                  {{form.image6}}
+                  </div>
+                <div class="field">
+                  <label>{{form.description.label_tag}}</label>
+                  {{form.description}}
+                </div>
+            </section>
+            <section class="split">
+            <div class="fields">
+              <div class="field half">
+                <label>{{form.year.label_tag}}</label>
+                {{form.year}}
+                <span class="form-text text-muted">
+                  {% if form.year.errors %}
+                  <div class="help">{{ form.year.errors }}</div>
+                {% endif %}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.mileage.label_tag}}</label>
+                {{form.mileage}}
+              </span>
+              </div>
+              <div class="field">
+                <label>{{form.fuel.label_tag}}</label>
+                {{form.fuel}}
+              </span>
+              </div>
+              <div class="field">
+                <label>{{form.engine_size.label_tag}}</label>
+                {{form.engine_size}}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.power.label_tag}}</label>
+                {{form.power}}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.gear_box.label_tag}}</label>
+                {{form.gear_box}}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.seats.label_tag}}</label>
+                {{form.seats}}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.doors.label_tag}}</label>
+                {{form.doors}}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.colors.label_tag}}</label>
+                {{form.colors}}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.price.label_tag}}</label>
+                {{form.price}}
+                <span class="form-text text-muted">
+                  {% if form.price.errors %}
+                  <div class="help">{{ form.price.errors }}</div>
+                {% endif %}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.kilometer.label_tag}}</label>
+                {{form.kilometer}}
+                <span class="form-text text-muted">
+                  {% if form.kilometer.errors %}
+                  <div class="help">{{ form.kilometer.errors }}</div>
+                {% endif %}
+              </span>
+              </div>
+              <div class="field half">
+                <label>{{form.reg_no.label_tag}}</label>
+                {{form.reg_no}}
+                <span class="form-text text-muted">
+                  {% if form.reg_no.errors %}
+                  <div class="help">{{ form.reg_no.errors }}</div>
+                {% endif %}
+              </span>
+              </div>
+          </div>
+          </section>
+        </div>
+        </section>
+        <div class="col" style="text-align: center;margin-top:10px;">
+          <button type="submit" class="primary" style="margin-right:10px;">Sell Now</button>
+          <a href="{% url 'shop:shop-home' %}" class="button">Back to Home</a>
+        </div>
+      </form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_state").change(function () {
+        const url = $("#sellCarForm").attr("data-cities-url");
+        const stateId = $(this).val();
+
+        $.ajax({
+            url: url,
+            data: {
+                'state_id': stateId
+            },
+            success: function (data) {
+                $("#id_city").html(data);
+            }
+        });
+
+    });
+    $("#id_make").change(function () {
+        const url = $("#sellCarForm").attr("data-models-url");
+        const makeId = $(this).val();
+
+        $.ajax({
+            url: url,
+            data: {
+                'make_id': makeId
+            },
+            success: function (data) {
+                $("#id_model").html(data);
+            }
+        });
+
+    });
+    $("#id_model").change(function () {
+        const url = $("#sellCarForm").attr("data-variants-url");
+        const modelId = $(this).val();
+
+        $.ajax({
+            url: url,
+            data: {
+                'model_id': modelId
+            },
+            success: function (data) {
+                $("#id_variant").html(data);
+            }
+        });
+
+    });
+</script>
+{% endblock %}

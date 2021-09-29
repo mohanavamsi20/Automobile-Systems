@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>Home - AMG</title>
+{% endblock title %}
+{% block menuhome %}
+<li class="active"> <a href="/">Home </a> </li>
+{% endblock menuhome %}
+{% block content %}
+      <section id="banner" class="major" style="background-image: url('static/images/banner-image-1-1920x700.jpg');">
+        <div class="inner">
+          <header class="major">
+            <h1>Want to buy a New Car?</h1>
+          </header>
+          <div class="content">
+            <p> Search new model cars in all brands and variants</p>
+            <ul class="actions">
+              <li><a href="{% url 'models:models-home'%}" class="button next scrolly">Browse Models</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <div id="main">
+        <!-- Featured Cars -->
+        <section class="tiles">
+          <div class="inner">
+            <header class="major">
+              <h2>LATEST MODELS</h2>
+            </header>
+          </div>
+          {% for object in objects%}
+          <article>
+            <span class="image">
+              <img src="{{object.image.url}}" alt="" />
+            </span>
+            <header class="major">
+              <p>
+                <i class="fa fa-dashboard"></i> {{object.mileage}}&nbsp;&nbsp;
+                <i class="fa fa-cube"></i> {{object.engine_size}}&nbsp;&nbsp;
+                <i class="fa fa-cog"></i> {{object.gear_box}}
+              </p>
+              <h3>{{object.make}}</h3>
+              <h4>{{object.model}}</h4>
+              <p><strong> {{object.price}}</strong></p>
+              <p>{{object.power}}  /  {{object.fuel}}  /  {{object.year}}</p>
+              <div class="major-actions">
+                <a href="{% url 'models:models-detail' object.id %}" class="button small next">View Car</a>
+              </div>
+            </header>
+          </article>
+          {% endfor %}
+          <a href="{% url 'models:models-home' %}" class="button next" style="margin-top: 10px;margin-left:85%;">KNOW MORE</a>
+        </section>
+
+        <!-- Blog Posts -->
+        <section class="tiles">
+          <div class="inner">
+            <header class="major">
+              <h2>SERVICES</h2>
+            </header>
+          </div>
+          <article>
+            <span class="image">
+              <img src="/static/images/blog-1-720x480.jpg" alt="" />
+            </span>
+            <header class="major">
+              <h3>BUY</h3>
+
+              <p>Buy a verified used car</p>
+
+              <div class="major-actions">
+                <a href="{% url 'shop:shop-buy' %}" class="button small next scrolly">BUY NOW</a>
+              </div>
+            </header>
+          </article>
+          <article>
+            <span class="image">
+              <img src="/static/images/blog-2-720x480.jpg" alt="" />
+            </span>
+            <header class="major">
+              <h3>SELL</h3>
+
+              <p>Sell your car at Best price</p>
+
+              <div class="major-actions">
+                <a href="{% url 'shop:shop-sell' %}" class="button small next scrolly">SELL NOW</a>
+              </div>
+            </header>
+          </article>
+          <article>
+            <span class="image">
+              <img src="/static/images/rivenditore.png" alt="" />
+            </span>
+            <header class="major">
+              <h3>Become a dealer</h3>
+
+              <p>Get sales through us</p>
+
+              <div class="major-actions">
+                <a href="{% url 'home:dealer' %}" class="button small next scrolly">SIGN UP NOW</a>
+              </div>
+            </header>
+          </article>
+          <a href="{% url 'shop:shop-home' %}" class="button next" style="margin-top: 10px;margin-left:85%;">KNOW MORE</a>
+        </section>
+        <div id="main" class="alt">
+
+          <!-- One -->
+            <section id="one">
+              <div class="inner">
+                <header class="major">
+                  <h1>Our Team Members</h1>
+                </header>
+                
+                <div class="row">
+                  <div class="col-md-4 col-sm-6 co-xs-12 text-center">
+
+                    <h3>Mohammad Tarique Anjum</h3>
+
+                    <h4><em>Team Lead</em></h4>
+
+                    <ul class="icons">
+                      <li><a href="https://github.com/iamtariqueanjum" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                      <li><a href="https://www.linkedin.com/in/tarique-anjum/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-4 col-sm-6 co-xs-12 text-center">
+
+                    <h3>B Mohana Vamsi</h3>
+
+                    <h4><em>Team Member</em></h4>
+
+                    <ul class="icons">
+                      <li><a href="https://github.com/mohanavamsi20" class="icon alt fa-github"><span class="label">Github</span></a></li>
+                      <li><a href="https://www.linkedin.com/in/mohana-vamsi-batchu-8abb39188/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-4 col-sm-6 co-xs-12 text-center">
+
+                    <h3>G Chandralekha</h3>
+
+                    <h4><em>Team Member</em></h4>
+
+                    <ul class="icons">
+                      <li><a href="https://github.com/ChandraLekha07" class="icon alt fa-github"><span class="label">Github</span></a></li>
+                      <li><a href="https://www.linkedin.com/in/chandra-lekha-gunupuram-402a1a1aa" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+        </div>
+        <section id="contact">
+          <div class="inner">
+            <section>
+              <header class="major">
+                <h2>Contact us</h2>
+              </header>
+              {% if messages %}
+              <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Thank you for the feedback!</h4>
+                  {% for message in messages %}
+                      <p>{{ message }}</p>
+                  {% endfor %}
+                  <p class="mb-0">Check out <a href="{% url 'models:models-home' %}" class="alert-link">Our latest models here.</a></p>
+              </div>
+              {% endif %}
+              <form method="post" action=" ">
+                {% csrf_token %}
+                <div class="fields">
+                  <div class="field half">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" />
+                  </div>
+                  <div class="field half">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" />
+                  </div>
+                  <div class="field">
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" />
+                  </div>
+                  <div class="field">
+                    <label for="message">Notes</label>
+                    <textarea name="message" id="message" rows="6"></textarea>
+                  </div>
+
+                  <div class="field half text-right">
+                    <ul class="actions">
+                      <li><input type="submit" value="Send Message" class="primary" /></li>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+            </section>
+            <section class="split">
+              <section>
+                <div class="contact-method">
+                  <span class="icon alt fa-envelope"></span>
+                  <h3>Email</h3>
+                  <a>automobilegarage2021@gmail.com</a>
+                </div>
+              </section>
+              <section>
+                <div class="contact-method">
+                  <span class="icon alt fa-phone"></span>
+                  <h3>Phone</h3>
+                  <span>+91 9848022338</span>
+                  <br>
+                  <span>+91 9848032919</span>
+                </div>
+              </section>
+              <section>
+                <div class="contact-method">
+                  <span class="icon alt fa-home"></span>
+                  <h3>Address</h3>
+                  <span>K L University <br>Green Fields, Vaddeswaram, Andhra Pradesh 522502</span>
+                </div>
+              </section>
+            </section>
+          </div>
+        </section>
+    </div>
+{% endblock content %}

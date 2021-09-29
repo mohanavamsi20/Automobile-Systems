@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>Dashboard - AMG</title>
+{% endblock title %}
+{% block menudashboard %}
+    <li class="active"><a href="{% url 'dashboard:dashboard-home' %}">Dashboard</a></li>
+{% endblock menudashboard %}
+{% block content %}
+<div id="main" class="alt">
+
+  <!-- One -->
+    <section id="one">
+      <div class="inner">
+        <header class="major">
+          <h1>DASHBOARD</h1>
+        </header>
+      </div>
+    </section>
+
+</div>
+{% endblock content %}

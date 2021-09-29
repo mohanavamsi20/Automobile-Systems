@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Dealer Locator - AMG</title>
+{% endblock title %}
+{% block menudealerlocate %}
+  <li class="active"> <a href="{% url 'models:dealer-locate'%}">Dealer locator</a> </li>
+{% endblock menudealerlocate %}
+{% block content %}
+{% if location %}
+<h3>Your Location:</h3>
+<p>{{ location.display_name }}</p>
+{% endif %}
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://tiles.locationiq.com/v3/js/liq-styles-ctrl-gl.js?v=0.1.8'></script>
+<link href='https://tiles.locationiq.com/v3/css/liq-styles-ctrl-gl.css?v=0.1.8' rel='stylesheet' />
+<style>
+#map {
+    width:100%;
+    height:600px;
+}
+</style>
+<body onload="getLocation()">
+<div id='map'></div>
+<script>
+        locationiq.key = 'pk.36ff70d1b48679ff22c02894258f9d5a';
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        function showPosition(position) {
+          window.latitude = position.coords.latitude;
+          window.longitude = position.coords.longitude;
+        }
+
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            attributionControl: false, //need this to show a compact attribution icon (i) instead of the whole text
+            zoom: 2,
+            center: [0, 0]
+        });
+        var layerStyles = {
+            "Streets": "streets/vector",
+            "Satellite": "earth/raster",
+            "Hybrid": "hybrid/vector",
+            "Dark": "dark/vector",
+            "Light": "light/vector"
+        };
+
+        map.addControl(new locationiqLayerControl({
+            key: locationiq.key,
+            layerStyles: layerStyles
+        }), 'top-left');
+
+</script>
+{% if dealer %}
+<h1>Nearest Dealer at you</h1>
+<p>{{ dealer.name }}</p>
+<p>{{ dealer.email }}</p>
+<p>{{ dealer.mobile }}</p>
+<p>{{ dealer.state }}</p>
+<p>{{ dealer.city }}</p>
+<p>{{ dealer.address }}</p>
+<p>{{ distance }} km</p>
+{% elif distance == 1000 %}
+<h1>There are no dealers within 1000kms of your range.</h1>
+{% else %}
+<form align="center" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="primary" style="margin-top: 20px;">Get Nearest Dealer</button>
+</form>
+</body>
+{% endif %}
+{% endblock content %}
